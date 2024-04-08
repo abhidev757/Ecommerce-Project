@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Add Coupon</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="/static/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="/dashboard" class="brand-wrap">
+                <h2>HERO CLUB</h2>
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item " id="dashboardTab">
+                    <a class="menu-link" href="/dashboard"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item " id="productTab">
+                    <a class="menu-link" href="/products"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+                </li>
+                <li class="menu-item " id="categoryTab">
+                    <a class="menu-link" href="/category"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Category</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/customer" id="customerTab"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Customer</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/orders" id="orderTab"> <i class="icon material-icons md-pie_chart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/coupons" id="orderTab"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/brand" id="orderTab"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Brand</span>
+                    </a>
+                </li>
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="/bestSelling"> <i class="icon material-icons md-monetization_on"></i>
+                        <span class="text">Best Selling</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="/bestCategory">Category</a>
+                        <a href="/bestProduct">Product</a>
+                        <a href="/bestBrand">Brand</a>
+                    </div>
+                </li>
+            </ul>
+            <hr>
+            
+        </nav>
+    </aside>
+   
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+                <!-- <form class="searchform">
+                    <div class="input-group">
+                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                        <button class="btn btn-light bg" type="button"> <i
+                                class="material-icons md-search"></i></button>
+                    </div>
+                    <datalist id="search_terms">
+                        <option value="Products">
+                        <option value="New orders">
+                        <option value="Apple iphone">
+                        <option value="Ahmed Hassan">
+                    </datalist>
+                </form> -->
+            </div>
+            <div class="col-nav">
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                        class="material-icons md-apps"></i> </button>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon" href="#">
+                            <i class="material-icons md-notifications animation-shake"></i>
+                            <span class="badge rounded-pill">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
+                                class="material-icons md-cast"></i></a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
+                            aria-expanded="false"><i class="material-icons md-public"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
+                            <a class="dropdown-item text-brand" href="#"><img src="/static/assets/imgs/theme/flag-us.png"
+                                    alt="English">English</a>
+                            <a class="dropdown-item" href="#"><img src="/static/assets/imgs/theme/flag-fr.png"
+                                    alt="Français">Français</a>
+                            <a class="dropdown-item" href="#"><img src="/static/assets/imgs/theme/flag-jp.png"
+                                    alt="Français">日本語</a>
+                            <a class="dropdown-item" href="#"><img src="/static/assets/imgs/theme/flag-cn.png"
+                                    alt="Français">中国人</a>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                            aria-expanded="false"> <img class="img-xs rounded-circle"
+                                src="/static/assets/imgs/people/avatar2.jpg" alt="User"></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                                Profile</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                                Settings</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                                center</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="/adminLogout"><i
+                                    class="material-icons md-exit_to_app"></i>Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <section class="content-main">
+            <form action="/addCouponPost" method="post" >
+            <div class="row">
+                <div class="col-6">
+                    <div class="content-header">
+                        <h2 class="content-title">Add New Coupon</h2>
+
+                        <div>
+                            <button class="btn btn-md rounded font-sm hover-up" onclick="return validateForm()">Add</button>
+                            <span id="submit-error"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>1. Coupon info</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Coupon Code</label>
+                                        <input type="text" placeholder="Type here" id="coupon_code" class="form-control" name="couponCode" onkeyup="validateCode()">
+                                        <span id="code-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description</label>
+                                        <textarea placeholder="Type here" id="coupon_description" class="form-control" rows="4" name="description" onkeyup="validateDescription()" ></textarea>
+                                        <span id="description-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Discount</label>
+                                        <input placeholder="Type here" id="percentage" class="form-control" name="discount" onkeyup="validatePrice()">
+                                        <span id="price-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Min Amount</label>
+                                        <input placeholder="Type here" id="min_amount" class="form-control" name="minAmount" onkeyup="validateMinAmount()">
+                                        <span id="min-amount-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Max Amount</label>
+                                        <input placeholder="Type here" id="max_amount" class="form-control" name="maxAmount" onkeyup="validateMaxAmount()" >
+                                        <span id="max-amount-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Expiry Date</label>
+                                        <input placeholder="Type here" type="date" id="expiry_date" class="form-control" name="expiryDate" onchange="validateDate()" >
+                                        <span id="date-error"></span>
+                                    </div>
+                                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </form>
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+   
+    <script>
+        function validateCode() {
+          var codeError = document.getElementById("code-error");
+          var code = document.getElementById("coupon_code").value.trim();
+          var uppercaseRegex = /^[A-Z0-9]+$/;
+          if (!uppercaseRegex.test(code)) {
+            codeError.innerHTML = "Coupon code must contain only uppercase letters and numbers";
+            codeError.style.color = "red";
+            return false;
+          }
+          codeError.innerHTML = "";
+          return true;
+        }
+    
+        function validateDescription() {
+          var descriptionError = document.getElementById("description-error");
+          var desc = document.getElementById("coupon_description").value.trim();
+          if (desc.length === 0) {
+            descriptionError.innerHTML = "Description is required";
+            descriptionError.style.color = "red";
+            return false;
+          }
+          descriptionError.innerHTML = "";
+          return true;
+        }
+    
+        function validatePrice() {
+          var priceError = document.getElementById("price-error");
+          var price = document.getElementById("percentage").value.trim();
+          if (price.length === 0 || isNaN(price) || parseFloat(price) <= 0 || parseFloat(price) > 100) {
+            priceError.innerHTML = "Invalid entry";
+            priceError.style.color = "red";
+            return false;
+          }
+          priceError.innerHTML = "";
+          return true;
+        }
+    
+        function validateMinAmount() {
+          var minAmountError = document.getElementById("min-amount-error");
+          var minAmount = document.getElementById("min_amount").value.trim();
+          if (minAmount.length === 0 || minAmount < 1  || isNaN(minAmount) || parseFloat(minAmount) < 0) {
+            minAmountError.innerHTML = "Invalid entry";
+            minAmountError.style.color = "red";
+            return false;
+          }
+          minAmountError.innerHTML = "";
+          return true;
+        }
+    
+        function validateMaxAmount() {
+          var maxAmountError = document.getElementById("max-amount-error");
+          var maxAmount = document.getElementById("max_amount").value.trim();
+          if (maxAmount.length === 0 || maxAmount < 1 || isNaN(maxAmount) || parseFloat(maxAmount) < 0) {
+            maxAmountError.innerHTML = "Invalid entry";
+            maxAmountError.style.color = "red";
+            return false;
+          }
+          maxAmountError.innerHTML = "";
+          return true;
+        }
+    
+        function validateDate() {
+          var dateError = document.getElementById("date-error");
+          var dateInput = document.getElementById("expiry_date").value;
+          var currentDate = new Date();
+          var selectedDate = new Date(dateInput);
+          if (selectedDate <= currentDate) {
+            dateError.innerHTML = "Please select a future date";
+            dateError.style.color = "red";
+            return false;
+          }
+          dateError.innerHTML = "";
+          return true;
+        }
+    
+        function validateForm() {
+          var isValid = true;
+          isValid &= validateCode();
+          isValid &= validateDescription();
+          isValid &= validatePrice();
+          isValid &= validateMinAmount();
+          isValid &= validateMaxAmount();
+          isValikeyup;
+          
+          var submitError = document.getElementById("submit-error");
+          if (!isValid) {
+            submitError.innerHTML = "Please enter all the fields correctly to submit";
+            submitError.style.color = "red";
+            return false;
+          } else {
+            submitError.innerHTML = "";
+            return true;
+          }
+        }
+      </script>
+
+
+<%- include("footer") %>

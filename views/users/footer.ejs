@@ -1,0 +1,55 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmLogout() {
+         Swal.fire({
+           title: "Are you sure?",
+           text: "You want to Logout?",
+           icon: "warning",
+           showCancelButton: true,
+           confirmButtonColor: "#d33",
+           cancelButtonColor: "#3085d6",
+           confirmButtonText: "Yes, Logout!",
+         }).then((result) => {
+           if (result.isConfirmed) {
+           
+             window.location.href = "/logout";
+           }
+         });
+       }
+    
+ </script>
+
+ 
+ <!-- Vendor JS-->
+ <script src="/static/js/vendor/modernizr-3.6.0.min.js"></script>
+ <script src="/static/js/vendor/jquery-3.6.0.min.js"></script>
+ <script src="/static/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+ <script src="/static/js/vendor/bootstrap.bundle.min.js"></script>
+ <script src="/static/js/plugins/slick.js"></script>
+ <script src="/static/js/plugins/jquery.syotimer.min.js"></script>
+ <script src="/static/js/plugins/wow.js"></script>
+ <script src="/static/js/plugins/jquery-ui.js"></script>
+ <script src="/static/js/plugins/perfect-scrollbar.js"></script>
+ <script src="/static/js/plugins/magnific-popup.js"></script>
+ <script src="/static/js/plugins/select2.min.js"></script>
+ <script src="/static/js/plugins/waypoints.js"></script>
+ <script src="/static/js/plugins/counterup.js"></script>
+ <script src="/static/js/plugins/jquery.countdown.min.js"></script>
+ <script src="/static/js/plugins/images-loaded.js"></script>
+ <script src="/static/js/plugins/isotope.js"></script>
+ <script src="/static/js/plugins/scrollup.js"></script>
+ <script src="/static/js/plugins/jquery.vticker-min.js"></script>
+ <script src="/static/js/plugins/jquery.theia.sticky.js"></script>
+ <script src="/static/js/plugins/jquery.elevatezoom.js"></script>
+ <!-- Template  JS -->
+ <script src="/static/js/main.js?v=3.4"></script>
+ <script src="/static/js/shop.js?v=3.4"></script>
+
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
