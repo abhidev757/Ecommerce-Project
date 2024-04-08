@@ -1,0 +1,593 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Edit Product</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/static/assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="/static/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="index.html" class="brand-wrap">
+                <img src="/static/assets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item " id="dashboardTab">
+                    <a class="menu-link" href="/dashboard"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item active" id="productTab">
+                    <a class="menu-link" href="/products"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+                </li>
+                <li class="menu-item " id="categoryTab">
+                    <a class="menu-link" href="/category"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Category</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/customer" id="customerTab"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Customer</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/orders" id="orderTab"> <i class="icon material-icons md-pie_chart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/coupons" id="orderTab"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/brand" id="orderTab"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Brand</span>
+                    </a>
+                </li>
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/bestSelling"> <i class="icon material-icons md-monetization_on"></i>
+                    <span class="text">Best Selling</span>
+                </a>
+                <div class="submenu">
+                    <a href="/bestCategory" >Category</a>
+                    <a href="/bestProduct">Product</a>
+                    <a href="/bestBrand" >Brand</a>
+                </div>
+            </li>
+            </ul>
+            <hr>
+            
+            
+        </nav>
+    </aside>
+   
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+                <!-- <form class="searchform">
+                    <div class="input-group">
+                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                        <button class="btn btn-light bg" type="button"> <i
+                                class="material-icons md-search"></i></button>
+                    </div>
+                    <datalist id="search_terms">
+                        <option value="Products">
+                        <option value="New orders">
+                        <option value="Apple iphone">
+                        <option value="Ahmed Hassan">
+                    </datalist>
+                </form> -->
+            </div>
+            <div class="col-nav">
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                        class="material-icons md-apps"></i> </button>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon" href="#">
+                            <i class="material-icons md-notifications animation-shake"></i>
+                            <span class="badge rounded-pill">3</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="requestfullscreen nav-link btn-icon"><i
+                                class="material-icons md-cast"></i></a>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
+                            aria-expanded="false"><i class="material-icons md-public"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
+                            <a class="dropdown-item text-brand" href="#"><img src="/static/assets/imgs/theme/flag-us.png"
+                                    alt="English">English</a>
+                            <a class="dropdown-item" href="#"><img src="/static/assets/imgs/theme/flag-fr.png"
+                                    alt="Français">Français</a>
+                            <a class="dropdown-item" href="#"><img src="/static/assets/imgs/theme/flag-jp.png"
+                                    alt="Français">日本語</a>
+                            <a class="dropdown-item" href="#"><img src="/static/assets/imgs/theme/flag-cn.png"
+                                    alt="Français">中国人</a>
+                        </div>
+                    </li>
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                            aria-expanded="false"> <img class="img-xs rounded-circle"
+                                src="/static/assets/imgs/people/avatar2.jpg" alt="User"></a>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                                Profile</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                                Settings</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                                center</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="/adminLogout"><i
+                                    class="material-icons md-exit_to_app"></i>Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <section class="content-main">
+            <form action="/editProductPost/<%= prod._id %>" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-6">
+                    <div class="content-header">
+                        <h2 class="content-title">Edit Product</h2>
+
+                        <div>
+                            <button class="btn btn-md rounded font-sm hover-up" onclick="return validateForm(event)">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>1. General info</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Product title</label>
+                                        <input type="text" placeholder="Type here" id="product_name" class="form-control" name="title" value="<%= prod.title %>" onkeyup="validateName()">
+                                        <span id="name-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description</label>
+                                        <input placeholder="Type here" id="product_description" type="text" class="form-control" name="description" value="<%= prod.description %>" onkeyup="validateDescription()">
+                                        <span id="description-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Fabric</label>
+                                        <input placeholder="Type here" id="product_fabric" class="form-control" name="fabric"  value="<%= prod.fabric %>" onkeyup="validateFabric()">
+                                        <span id="fabric-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Color</label>
+                                        <input placeholder="Type here" id="product_color" class="form-control" name="color"  value="<%= prod.color %>" onkeyup="validateColor()">
+                                        <span id="color-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Style</label>
+                                        <input placeholder="Type here" id="product_style" class="form-control" name="style"  value="<%= prod.style %>" onkeyup="validateStyle()">
+                                        <span id="style-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">OldPrice</label>
+                                        <input placeholder="Type here" id="product_oldprice" class="form-control" name="oldPrice"  value="<%= prod.oldPrice %>" onkeyup="validateOldPrice()">
+                                        <span id="oldprice-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Stock</label>
+                                        <input placeholder="Type here" id="product_stock" class="form-control" name="stock"  value="<%= prod.stock %>" onkeyup="validateStock()">
+                                        <span id="stock-error"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label" for="sizeStock">Size</label><br>
+                                        <% prod.variants.forEach(variant => { %>
+                                            <label class="form-label"><%= variant.size %></label>
+                                            <input placeholder="Enter the stock" class="form-control" name="<%= variant.size %>stock" value="<%= variant.stock %>">
+                                        <% }) %>
+                                    </div>                                    
+                                    <div class="mb-4">
+                                        <label class="form-label">Offer</label>
+                                        <input placeholder="Type here" class="form-control" name="offer"  value="<%= prod.offer %>">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Brand name</label>
+                                        <select class="form-select" name="brand">
+                                            <% brands.forEach(row => { %>
+                                                <option value="<%= row._id %>"> <%= row.brand %> </option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>2. Pricing</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Cost in INR</label>
+                                        <input type="text" placeholder="₹00.0" id="product_price" class="form-control" name="price" value="<%= prod.price %>" onkeyup="validatePrice()">
+                                        <span id="price-error"></span>
+                                    </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>3. Category</h6>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Category</label>
+                                        <select class="form-select" name="category">
+                                            <% cate.forEach(row => { %>
+                                                <option value="<%= row._id %>"> <%= row.category %> </option>
+                                            <% }) %>
+                                            
+                                        </select>
+                                    </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>4. Media</h6>
+                                </div>
+                                <div class="col-md-9 existing-images">
+                                    <% if (prod.images && prod.images.length > 0) { %>
+                                    <div class="image-container">
+                                        <% prod.images.forEach((imageUrl, index) => { %>
+                                            <div class="image-preview">
+                                              <img src="/static/uploads/<%= imageUrl %>" alt="Existing Image" class="existing-image">
+                                              <i class="fa-solid fa-repeat replace-image-icon" data-index="<%= index %>"></i>
+                                              <i class="fa-solid fa-trash delete-image-btn" data-index="<%= index %>"></i>
+                                            
+                                            </div>
+                                          <% }) %>
+                                    </div>
+                                    <% }else{ %>
+                                        <p>No existing images</p>
+                                        <% } %>
+                                </div> <!-- col.// -->
+                            </div> <!-- .row end// -->
+                            <div class="mb-4">
+                                <label class="form-label">New Images</label>
+                                <input class="form-control" type="file" name="images" id="product_image" multiple onkeyup="validateImage()">
+                                <span id="image-error"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </form>
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+
+
+    
+
+        <script>
+            // Handle replacement of images
+            document.querySelectorAll('.replace-image-icon').forEach(icon => {
+              icon.addEventListener('click', function () {
+                const index = this.dataset.index;
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'image/*';
+                fileInput.onchange = function (event) {
+                  const file = event.target.files[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                      const imagePreview = document.querySelector(`.existing-images .image-container .image-preview:nth-child(${parseInt(index) + 1}) img`);
+                      imagePreview.src = e.target.result;
+                      updateFileInput(file, index);
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                };
+                fileInput.click();
+              });
+            });
+          
+            function updateFileInput(file, index) {
+              const fileInput = document.getElementById('product_image');
+              const fileList = new DataTransfer();
+              fileList.items.add(file);
+              fileInput.files = fileList.files;
+            }
+        </script>
+        
+            <script>
+           
+           window.addEventListener('DOMContentLoaded', function () {
+            const existingImages = document.querySelectorAll('.existing-images img');
+            const fileInput = document.getElementById('product_image');
+            const fileList = new DataTransfer();
+        
+            existingImages.forEach(function (image) {
+                const url = image.getAttribute('src');
+                const filename = url.substring(url.lastIndexOf('/') + 1);
+                fetch(url)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const file = new File([blob], filename, { type: blob.type });
+                        fileList.items.add(file);
+                        fileInput.files = fileList.files;
+                    });
+            });
+        });
+        
+        document.querySelectorAll('.delete-image-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.dataset.index;
+                const parentDiv = this.parentElement;
+                parentDiv.remove(); 
+                updateFileInput(); 
+            });
+        });
+        
+        function updateFileInput() {
+            const fileInput = document.getElementById('product_image');
+            const existingImages = document.querySelectorAll('.existing-images img');
+            const fileList = new DataTransfer();
+            
+            existingImages.forEach(function (image) {
+                const url = image.getAttribute('src');
+                const filename = url.substring(url.lastIndexOf('/') + 1);
+                fetch(url)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const file = new File([blob], filename, { type: blob.type });
+                        fileList.items.add(file);
+                        fileInput.files = fileList.files;
+                    });
+            });
+        
+            
+            if (existingImages.length === 0) {
+                fileInput.value = ''; 
+            }
+        }
+        
+            </script>
+
+
+<script>
+    var nameError = document.getElementById("name-error");
+    var descriptionError = document.getElementById("description-error");
+    var priceError = document.getElementById("price-error");
+    var imageError = document.getElementById("image-error");
+    var stockError = document.getElementById("stock-error");
+    var submitError = document.getElementById("submit-error");
+    var fabricError = document.getElementById("fabric-error");
+    var colorError = document.getElementById("color-error");
+    var styleError = document.getElementById("style-error");
+    var oldpriceError = document.getElementById("oldprice-error");
+
+    function validateName() {
+      var name = document.getElementById("product_name").value.trim();
+      if (name.length === 0) {
+        nameError.innerHTML = "Product name is required";
+        nameError.style.color = "red";
+        return false;
+      }
+      nameError.innerHTML = "Valid";
+      nameError.style.color = "green";
+      return true;
+    }
+    function validateFabric() {
+      var name = document.getElementById("product_fabric").value.trim();
+      if (name.length === 0) {
+        fabricError.innerHTML = "Fabric name is required";
+        fabricError.style.color = "red";
+        return false;
+      }
+      fabricError.innerHTML = "Valid";
+      fabricError.style.color = "green";
+      return true;
+    }
+    function validateColor() {
+      var name = document.getElementById("product_color").value.trim();
+      if (name.length === 0) {
+        colorError.innerHTML = "Color is required";
+        colorError.style.color = "red";
+        return false;
+      }
+      colorError.innerHTML = "Valid";
+      colorError.style.color = "green";
+      return true;
+    }
+    function validateStyle() {
+      var name = document.getElementById("product_style").value.trim();
+      if (name.length === 0) {
+        styleError.innerHTML = "Style is required";
+        styleError.style.color = "red";
+        return false;
+      }
+      styleError.innerHTML = "Valid";
+      styleError.style.color = "green";
+      return true;
+    }
+
+    function validateDescription() {
+      var desc = document.getElementById("product_description").value.trim();
+      if (desc.length === 0) {
+        descriptionError.innerHTML = "Description is required";
+        descriptionError.style.color = "red";
+        return false;
+      }
+      descriptionError.innerHTML = "Valid";
+      descriptionError.style.color = "green";
+      return true;
+    }
+
+    function validatePrice() {
+    var price = document.getElementById("product_price").value.trim();
+  
+
+    if (price.length === 0 || isNaN(price) || parseFloat(price) <= 0) {
+        priceError.innerHTML = "Price is required and must be a positive number";
+        priceError.style.color = "red";
+        return false;
+    }
+
+    priceError.innerHTML = "Valid";
+    priceError.style.color = "green";
+    return true;
+}
+    function validateOldPrice() {
+    var price = document.getElementById("product_oldprice").value.trim();
+  
+
+    if (price.length === 0 || isNaN(price) || parseFloat(price) <= 0) {
+        oldpriceError.innerHTML = "Price is required and must be a positive number";
+        oldpriceError.style.color = "red";
+        return false;
+    }
+
+    oldpriceError.innerHTML = "Valid";
+    oldpriceError.style.color = "green";
+    return true;
+}
+
+function validateImage() {
+    var imageInput = document.getElementById("product_image");
+ 
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.webp)$/i;
+
+    if (imageInput.files.length === 0) {
+      imageError.innerHTML = "Image is required";
+      imageError.style.color = "red";
+      return false;
+    }
+
+    var file = imageInput.files[0];
+    if (!allowedExtensions.exec(file.name)) {
+      imageError.innerHTML = "Only JPG, JPEG, PNG, or GIF files are allowed";
+      imageError.style.color = "red";
+      return false;
+    }
+
+    imageError.innerHTML = "Valid";
+    imageError.style.color = "green";
+    return true;
+  }
+   
+
+function validateStock() {
+  var stock = document.getElementById("product_stock").value.trim();
+  if (stock.length === 0 || isNaN(stock) || parseInt(stock) < 0) {
+    stockError.innerHTML = "Stock is required and must be a non-negative number";
+    stockError.style.color = "red";
+    return false;
+  }
+  stockError.innerHTML = "Valid";
+  stockError.style.color = "green";
+  return true;
+}
+
+
+
+function validateForm(event) {
+    var isValid = validateName() &&
+        validateDescription() &&
+        validatePrice() &&
+        validateImage() &&
+        validateStock() &&
+        validateFabric() &&
+        validateColor() &&
+        validateStyle() &&
+        validateOldPrice();
+
+    if (!isValid) {
+        event.preventDefault(); // Prevent form from submitting
+        submitError.style.display = "block";
+        submitError.innerHTML = "Please enter all the fields to submit ";
+        submitError.style.color = "red";
+        setTimeout(function () {
+            submitError.style.display = "none";
+        }, 3000);
+    }
+}
+
+
+
+    // function validateForm() {
+    //   if (
+    //     !validateName() ||
+    //     !validateDescription() ||
+    //     !validatePrice() ||
+    //     !validateImage() ||
+    //     !validateStock() ||
+    //     !validateFabric() ||
+    //     !validateColor() ||
+    //     !validateStyle() ||
+    //     !validateOldPrice() 
+        
+    //   ) {
+    //     submitError.style.display = "block";
+    //     submitError.innerHTML = "Please enter all the fields to submit ";
+    //     submitError.style.color = "red";
+    //     setTimeout(function () {
+    //       submitError.style.display = "none";
+    //     }, 3000);
+    //     return false;
+    //   }
+    // }
+  </script>
+
+
+
+<%- include("footer") %>
