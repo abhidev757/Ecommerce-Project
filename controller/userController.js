@@ -96,8 +96,8 @@ const userController = {
           req.session.userID = data._id;
           res.redirect("/");
         } else {
-          res.render("users/userLogin",{title: "Login/Signup"});
-          console.log("pass or email incorrect");
+          res.render("users/userLogin",{title: "Login/Signup",signup:"pass or email incorrect"});
+          
         }
       }
     } catch (error) {
@@ -135,12 +135,14 @@ const userController = {
 
       const otp = generateOTP();
 
+
       const info = await transporter.sendMail({
         from: process.env.EMAIL, // sender address
-        to: "kannanabhishek757@gmail.com", // list of receivers
+        to: req.body.email, // list of receivers
         subject: `OTP verification`, // Subject line
         html: `<b>Your OTP is ${otp} </b>`, // html body
       });
+      console.log("info:",info);
 
       const user = new User({
         name: req.body.name,
@@ -162,6 +164,7 @@ const userController = {
 
 
   homePage: async (req, res) => {
+    
     const { wishlistCount, cartItemCount } = req;
     const prod = await Products.aggregate([
       { $match: { isPublished: true } },
@@ -171,7 +174,7 @@ const userController = {
       
   ]);
   
-
+  req.session.checkoutBlock = false;
     res.render("users/homePage", {
       prod: prod,
       user: req.session.user || req.user,
@@ -860,62 +863,71 @@ deleteAddress:async (req, res, next) => {
 },
   //-------------------------------------------------------------------Checkout----------------------------------------------------------
   checkout: async (req, res) => {
-    const { wishlistCount, cartItemCount } = req;
-    const orderId = req.query.orderId;
-    const userId = req.session.userID;
-    const userData = await User.findById(userId);
-    // const cartItems = await Cart.find({userId:userId}).populate("items.product");
-    // const address = await Address.find({userId:userId})
-    // const coupon = await Coupon.findById(userId);
-    // const cartTotalPrice = cartItems.totalPrice
-    let userCart;
-    let totalPrice;
-    let addresses;
-    
 
-    if (orderId) {
-      const order = await Order.findById(orderId).populate('items.product').exec();
-      if (!order) {
-        return res.status(404).json({ message: 'Order not found' });
+    if(req.session.checkoutBlock){
+      req.session.checkoutBlock=false
+      res.redirect("/");
+    }else{
+      const { wishlistCount, cartItemCount } = req;
+      const orderId = req.query.orderId;
+      const userId = req.session.userID;
+      const userData = await User.findById(userId);
+      // const cartItems = await Cart.find({userId:userId}).populate("items.product");
+      // const address = await Address.find({userId:userId})
+      // const coupon = await Coupon.findById(userId);
+      // const cartTotalPrice = cartItems.totalPrice
+      let userCart;
+      let totalPrice;
+      let addresses;
+      
+  
+      if (orderId) {
+        const order = await Order.findById(orderId).populate('items.product').exec();
+        if (!order) {
+          return res.status(404).json({ message: 'Order not found' });
+        }
+        addresses = await Address.find({ userId: userId });
+        console.log(addresses);
+       
+        userCart = order.items;
+        totalPrice = order.totalPrice;
+      }else {
+        addresses = await Address.find({ userId: userId });
+        console.log(addresses);
+       
+        const cart = await Cart.findOne({ userId: userId }).populate('items.product').exec();
+        if (!cart) {
+          return res.status(404).json({ message: 'Cart not found' });
+        }
+        userCart = cart.items;
+        totalPrice = cart.totalPrice;
       }
-      addresses = await Address.find({ userId: userId });
-      console.log(addresses);
+  
+      const validCoupons = await Coupon.find({
+          expiryDate: { $gt: new Date() }, 
+           minimumAmount: { $lt: totalPrice }, 
+          userID: { $ne: userId },
+          isListed: true 
+      });
+      console.log('coupons',validCoupons);
+  
+      
      
-      userCart = order.items;
-      totalPrice = order.totalPrice;
-    }else {
-      addresses = await Address.find({ userId: userId });
-      console.log(addresses);
-     
-      const cart = await Cart.findOne({ userId: userId }).populate('items.product').exec();
-      if (!cart) {
-        return res.status(404).json({ message: 'Cart not found' });
-      }
-      userCart = cart.items;
-      totalPrice = cart.totalPrice;
+      res.render("users/checkout",{ 
+        user: userData || req.user,
+        cartItems: userCart,
+        address: addresses,
+        coupons:validCoupons,
+        cartCount: cartItemCount,
+        wishlistCount: wishlistCount,
+        totalPrice:totalPrice,
+        orderID: orderId,
+        title: "Checkout",
+        alert: "Add new address to order",
+        rpzKey:process.env.RAZORPAY_ID_KEY
+      });
     }
-
-    const validCoupons = await Coupon.find({
-        expiryDate: { $gt: new Date() }, 
-         minimumAmount: { $lt: totalPrice }, 
-        userID: { $ne: userId },
-        isListed: true 
-    });
-    console.log('coupons',validCoupons);
-
-    // console.log(address);
-    res.render("users/checkout",{ 
-      user: userData || req.user,
-      cartItems: userCart,
-      address: addresses,
-      coupons:validCoupons,
-      cartCount: cartItemCount,
-      wishlistCount: wishlistCount,
-      totalPrice:totalPrice,
-      orderID: orderId,
-      title: "Checkout",
-      rpzKey:process.env.RAZORPAY_ID_KEY
-    });
+   
   },
 
   placeOrder: async (req,res)=>{
@@ -939,6 +951,7 @@ deleteAddress:async (req, res, next) => {
 
       if (paymentStatus === "Paid" || paymentStatus === "Pending") {
           await orderToUpdate.save();
+          req.session.checkoutBlock = true
           return res.status(200).render("users/thankyou", { title: "Thank You", orderID });
       } else if (paymentStatus === "Failed") {
           await orderToUpdate.save();
@@ -1022,6 +1035,7 @@ for (const item of order.items) {
   );
 }
 if (paymentStatus === "Paid" || paymentStatus === "Pending") {
+  req.session.checkoutBlock = true
   return res.status(200).render("users/thankyou", { title: "Thank You", orderId: order._id.toString() });
 
 } else if (paymentStatus === "Failed") {

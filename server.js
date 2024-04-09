@@ -20,6 +20,7 @@ db.then(()=>{
     console.log("Error in connecting to database");
 })
 
+
 //middelewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -47,6 +48,13 @@ app.use(
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+//message
+app.use((req,res,next)=>{
+  res.locals.message = req.session.message;
+  delete req.session.message;
+    next();
+  })
 
 //route
 app.use("/", require("./routes/adminRoutes"));

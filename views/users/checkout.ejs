@@ -252,7 +252,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="card-body">
-                                                    <div>
+                                                    <div class="address-box">
                                                         <input style="width: 16px; height: 16px;" type="radio" checked
                                                             name="addressID"
                                                             id="addressID"
@@ -276,6 +276,9 @@
                                                             New
                                                             Address</a>
                                                     </div>
+                                                    <div id="addressError" style="display: none; background-color: #ffffff; border: 1px solid #ffffff; color: #b71d2c; padding: 10px; border-radius: 5px; font-family: Arial, sans-serif; font-size: 16px;">
+                                                        <strong>Error:</strong> Please add an address.
+                                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -497,7 +500,11 @@
 <script src="/static/js/vendor/jquery-3.6.0.min.js"></script>
 
 
-
+<script>
+    setTimeout(() => {
+        document.getElementById("error").style.display= "none"
+    }, 3000);
+</script>
 <script>
     document.getElementById('showCouponsButton').addEventListener('click', function() {
     const totalPrice = document.getElementById("subtotal").innerText;
@@ -607,7 +614,29 @@
      });
  }
 </script>
+<script>
+    function validateAddress() {
+       
+        var addressCount = document.querySelectorAll('.address-box').length;
 
+        
+        if (addressCount === 0) {
+            var errorMessage = document.getElementById('addressError');
+            if (errorMessage) {
+                errorMessage.innerHTML = 'Please add an address.';
+                errorMessage.style.display = 'block'; 
+                setTimeout(()=>{
+                  errorMessage.style.display = 'none'; 
+                },3000)
+            }
+            return false; 
+        } else {
+            
+            // document.getElementById('addressError').style.display = 'none';
+             validateForm(); 
+        }
+    }
+  </script>
 
 
 <script>
@@ -717,7 +746,7 @@
   
     document.getElementById("orderForm").addEventListener("submit", function (event) {
    event.preventDefault();
-   validateForm();
+   validateAddress();
    // Additional logic if needed
 });
     
