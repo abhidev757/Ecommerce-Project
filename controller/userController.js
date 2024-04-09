@@ -614,7 +614,8 @@ deleteAddress:async (req, res, next) => {
         const options = {
             format: 'A4',
             orientation:'portrait',
-            border:'10mm'
+            border:'10mm',
+            phantomPath: '/path/to/phantomjs-binary'
         }
 
         pdf.create(invoiceHtml, options).toStream((err, stream) => {
