@@ -1,73 +1,83 @@
 const express = require("express");
 const router = express.Router();
 const nocache = require("nocache");
-const {upload, adminController} = require("../controller/adminController")
 const isAdmin = require("../middlewares/adminAuth");
-const dashController = require("../controller/dashboardController")
+
+// Import granular admin controllers
+const adminAuthController = require("../controller/admin/authController");
+const { upload, productController } = require("../controller/admin/productController");
+const categoryController = require("../controller/admin/categoryController");
+const customerController = require("../controller/admin/customerController");
+const orderController = require("../controller/admin/orderController");
+const couponController = require("../controller/admin/couponController");
+const brandController = require("../controller/admin/brandController");
+const reportController = require("../controller/admin/reportController");
+const dashController = require("../controller/admin/dashboardController");
 
 
-//admin
-router.get("/adminLogin",adminController.adminLogin);
-router.get("/adminLogout",adminController.adminLogout);
-router.post("/adminLoginPost",adminController.adminLoginPost);
-// router.get("/dashboard",adminController.adminDashboard);
-router.post("/generate-report",adminController.generateReport);
-router.get("/adminHome",isAdmin, dashController.getDashboard);
-router.get("/fetchdashboard",isAdmin, dashController.fetchDashboard)
-router.get("/dashboard",isAdmin, dashController.getDashboard)
+// Auth
+router.get("/adminLogin", adminAuthController.adminLogin);
+router.get("/adminLogout", adminAuthController.adminLogout);
+router.post("/adminLoginPost", adminAuthController.adminLoginPost);
 
-//product
-router.get("/products",isAdmin,adminController.adminProducts);
-router.get("/addProduct",isAdmin,adminController.adminAddProduct);
-router.post("/addProductPost",upload,adminController.adminAddProductPost);
-router.get("/editProduct/:id",adminController.adminEditProduct);
-router.post("/editProductPost/:id",upload,adminController.adminEditProductPost);
-router.get("/publish/:id",adminController.publish);
-router.get("/unpublish/:id",adminController.unpublish);
-router.get("/products/:page",isAdmin, adminController.getProductsPagination);
+// Dashboard
+router.get("/adminHome", isAdmin, dashController.getDashboard);
+router.get("/fetchdashboard", isAdmin, dashController.fetchDashboard);
+router.get("/dashboard", isAdmin, dashController.getDashboard);
 
-//category
-router.get("/category",isAdmin,adminController.adminCategory);
-router.get("/addCategory",isAdmin,adminController.adminAddCategory);
-router.post("/addCategoryPost",adminController.adminAddCategoryPost);
-router.get("/editCategory/:id",isAdmin,adminController.adminEditCategory);
-router.post("/editCategoryPost/:id",adminController.adminEditCategoryPost);
-router.get("/list/:id",adminController.list)
-router.get("/unlist/:id",adminController.unlist)
+// Product
+router.get("/products", isAdmin, productController.adminProducts);
+router.get("/addProduct", isAdmin, productController.adminAddProduct);
+router.post("/addProductPost", upload, productController.adminAddProductPost);
+router.get("/editProduct/:id", productController.adminEditProduct);
+router.post("/editProductPost/:id", upload, productController.adminEditProductPost);
+router.get("/publish/:id", productController.publish);
+router.get("/unpublish/:id", productController.unpublish);
+router.get("/products/:page", isAdmin, productController.getProductsPagination);
 
-//customers
-router.get("/customer",isAdmin,adminController.adminCustomer);
-router.get("/blockUser/:id",adminController.blockUser);
-router.get("/unblockUser/:id",adminController.unblockUser);
+// Category
+router.get("/category", isAdmin, categoryController.adminCategory);
+router.get("/addCategory", isAdmin, categoryController.adminAddCategory);
+router.post("/addCategoryPost", categoryController.adminAddCategoryPost);
+router.get("/editCategory/:id", isAdmin, categoryController.adminEditCategory);
+router.post("/editCategoryPost/:id", categoryController.adminEditCategoryPost);
+router.get("/list/:id", categoryController.list);
+router.get("/unlist/:id", categoryController.unlist);
 
-//Orders
-router.get("/orders",isAdmin,adminController.orders);
-router.get("/orders/:page",isAdmin, adminController.getOrdersPagination);
-router.get("/adminOrderDetails/:orderId",isAdmin,adminController.adminOrdersDetails);
-router.post("/updateStatus",adminController.updateStatus);
-router.get("/adminOrderCancel/:orderId",adminController.adminOrderCancel);
+// Customers
+router.get("/customer", isAdmin, customerController.adminCustomer);
+router.get("/blockUser/:id", customerController.blockUser);
+router.get("/unblockUser/:id", customerController.unblockUser);
 
-//Coupons
-router.get("/coupons",isAdmin,adminController.coupons);
-router.get("/addCoupon",isAdmin,adminController.addCoupon);
-router.post("/addCouponPost",isAdmin,adminController.addCouponPost);
-router.get("/editCoupon/:id",isAdmin,adminController.editCoupon);
-router.post("/editCouponPost/:id",adminController.editCouponPost);
-router.get("/couponList/:id",adminController.couponList)
-router.get("/couponUnlist/:id",adminController.couponUnlist)
+// Orders
+router.get("/orders", isAdmin, orderController.orders);
+router.get("/orders/:page", isAdmin, orderController.getOrdersPagination);
+router.get("/adminOrderDetails/:orderId", isAdmin, orderController.adminOrdersDetails);
+router.post("/updateStatus", orderController.updateStatus);
+router.get("/adminOrderCancel/:orderId", orderController.adminOrderCancel);
 
-//Brand
-router.get("/brand",isAdmin,adminController.adminBrand);
-router.get("/addBrand",isAdmin,adminController.adminAddBrand);
-router.post("/addBrandPost",adminController.adminAddBrandPost);
-router.get("/editBrand/:id",isAdmin,adminController.adminEditBrand);
-router.post("/editBrandPost/:id",adminController.adminEditBrandPost);
-router.get("/brandList/:id",adminController.brandList)
-router.get("/brandUnlist/:id",adminController.brandUnlist)
+// Coupons
+router.get("/coupons", isAdmin, couponController.coupons);
+router.get("/addCoupon", isAdmin, couponController.addCoupon);
+router.post("/addCouponPost", isAdmin, couponController.addCouponPost);
+router.get("/editCoupon/:id", isAdmin, couponController.editCoupon);
+router.post("/editCouponPost/:id", couponController.editCouponPost);
+router.get("/couponList/:id", couponController.couponList);
+router.get("/couponUnlist/:id", couponController.couponUnlist);
 
-//BestSelling
-router.get("/bestCategory",isAdmin,adminController.bestCategory);
-router.get("/bestProduct",isAdmin,adminController.bestProduct);
-router.get("/bestBrand",isAdmin,adminController.bestBrand);
+// Brand
+router.get("/brand", isAdmin, brandController.adminBrand);
+router.get("/addBrand", isAdmin, brandController.adminAddBrand);
+router.post("/addBrandPost", brandController.adminAddBrandPost);
+router.get("/editBrand/:id", isAdmin, brandController.adminEditBrand);
+router.post("/editBrandPost/:id", brandController.adminEditBrandPost);
+router.get("/brandList/:id", brandController.brandList);
+router.get("/brandUnlist/:id", brandController.brandUnlist);
+
+// Reports / Best Selling
+router.post("/generate-report", reportController.generateReport);
+router.get("/bestCategory", isAdmin, reportController.bestCategory);
+router.get("/bestProduct", isAdmin, reportController.bestProduct);
+router.get("/bestBrand", isAdmin, reportController.bestBrand);
 
 module.exports = router;

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Evara Dashboard</title>
+    <title>HERO CLUB Admin</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,16 +15,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="/static/assets/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link href="/static/assets/css/main.css" rel="stylesheet" type="text/css" />
-   
-
+    <%- typeof extraStyles !== 'undefined' ? extraStyles : '' %>
 </head>
 
 <body>
     <div class="screen-overlay"></div>
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
-            <a href="index.html" class="brand-wrap">
-                <img src="/static/assets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+            <a href="/dashboard" class="brand-wrap">
+                <h2>HERO CLUB</h2>
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
@@ -32,51 +31,108 @@
         </div>
         <nav>
             <ul class="menu-aside">
-                <li class="menu-item " id="dashboardTab">
+                <li class="menu-item" id="dashboardTab">
                     <a class="menu-link" href="/dashboard"> <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-                <li class="menu-item " id="productTab">
+                <li class="menu-item" id="productTab">
                     <a class="menu-link" href="/products"> <i class="icon material-icons md-shopping_bag"></i>
                         <span class="text">Products</span>
                     </a>
                 </li>
-                <li class="menu-item " id="categoryTab">
+                <li class="menu-item" id="categoryTab">
                     <a class="menu-link" href="/category"> <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Category</span>
                     </a>
                 </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/customer" id="customerTab"> <i class="icon material-icons md-person"></i>
+                <li class="menu-item" id="customerTab">
+                    <a class="menu-link" href="/customer"> <i class="icon material-icons md-person"></i>
                         <span class="text">Customer</span>
                     </a>
                 </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/orders" id="orderTab"> <i class="icon material-icons md-pie_chart"></i>
+                <li class="menu-item" id="orderTab">
+                    <a class="menu-link" href="/orders"> <i class="icon material-icons md-pie_chart"></i>
                         <span class="text">Orders</span>
                     </a>
                 </li>
-            </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
+                <li class="menu-item" id="couponTab">
+                    <a class="menu-link" href="/coupons"> <i class="icon material-icons md-local_offer"></i>
+                        <span class="text">Coupons</span>
+                    </a>
+                </li>
+                <li class="menu-item" id="brandTab">
+                    <a class="menu-link" href="/brand"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Brand</span>
+                    </a>
+                </li>
+                <li class="menu-item has-submenu" id="bestSellingTab">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-monetization_on"></i>
+                        <span class="text">Best Selling</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-settings-1.html">Setting sample 1</a>
-                        <a href="page-settings-2.html">Setting sample 2</a>
+                        <a href="/bestCategory">Category</a>
+                        <a href="/bestProduct">Product</a>
+                        <a href="/bestBrand">Brand</a>
                     </div>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
-                        <span class="text"> Starter page </span>
-                    </a>
-                </li>
             </ul>
-            <br>
-            <br>
+            <hr>
         </nav>
     </aside>
-   
+
+    <script>
+        (function () {
+            var path = window.location.pathname;
+
+            // Map URL patterns to sidebar tab IDs
+            var navMap = [
+                { id: 'dashboardTab',   patterns: ['/dashboard'] },
+                { id: 'productTab',     patterns: ['/products', '/addProduct', '/editProduct'] },
+                { id: 'categoryTab',    patterns: ['/category', '/addCategory', '/editCategory'] },
+                { id: 'customerTab',    patterns: ['/customer'] },
+                { id: 'orderTab',       patterns: ['/orders', '/adminOrderDetails'] },
+                { id: 'couponTab',      patterns: ['/coupons', '/addCoupon', '/editCoupon'] },
+                { id: 'brandTab',       patterns: ['/brand', '/addBrand', '/editBrand'] },
+                { id: 'bestSellingTab', patterns: ['/bestCategory', '/bestProduct', '/bestBrand'] },
+            ];
+
+            navMap.forEach(function (item) {
+                var matched = item.patterns.some(function (pattern) {
+                    return path === pattern || path.startsWith(pattern + '/');
+                });
+                if (matched) {
+                    var el = document.getElementById(item.id);
+                    if (el) el.classList.add('active');
+                }
+            });
+
+            // Also activate the correct Best Selling submenu link
+            var submenuLinks = document.querySelectorAll('#bestSellingTab .submenu a');
+            submenuLinks.forEach(function (link) {
+                if (link.getAttribute('href') === path) {
+                    link.classList.add('active');
+                }
+            });
+        })();
+    </script>
+
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+            </div>
+            <div class="col-nav">
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
+                <ul class="nav">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </header>
+        <section class="content-main">
