@@ -197,9 +197,10 @@ const orderController = {
       if (paymentStatus === "Paid" || paymentStatus === "Pending") {
         await orderToUpdate.save();
         req.session.checkoutBlock = true;
+        const { wishlistCount, cartItemCount } = req;
         return res
           .status(200)
-          .render("users/thankyou", { title: "Thank You", orderID });
+          .render("users/thankyou", { title: "Thank You", orderID, user: req.session.user || req.user, wishlistCount, cartCount: cartItemCount });
       } else if (paymentStatus === "Failed") {
         await orderToUpdate.save();
         return res.status(200).redirect("/ordersProfile");
@@ -283,9 +284,13 @@ const orderController = {
 
     if (paymentStatus === "Paid" || paymentStatus === "Pending") {
       req.session.checkoutBlock = true;
+      const { wishlistCount, cartItemCount } = req;
       return res.status(200).render("users/thankyou", {
         title: "Thank You",
         orderId: order._id.toString(),
+        user: req.session.user || req.user,
+        wishlistCount,
+        cartCount: cartItemCount,
       });
     } else if (paymentStatus === "Failed") {
       return res.status(200).redirect("/ordersProfile");
@@ -362,9 +367,12 @@ const orderController = {
   },
 
   thankyou: (req, res) => {
+    const { wishlistCount, cartItemCount } = req;
     res.render("users/thankyou", {
       user: req.session.user || req.user,
       title: "Thankyou",
+      wishlistCount,
+      cartCount: cartItemCount,
     });
   },
 };
